@@ -1,2 +1,2 @@
 # proof-of-play-node
-Consensus research Proof-of-Play as node
+experimental Consensus Proof-of-Play as node

@@ -52,6 +52,12 @@ function wsStart() {
 
             let msg = JSON.parse(message)
 
+            switch (msg.op) {
+                case 'block-in':
+                    console.log('new incoming block', msg.height, msg.hash)
+                    break
+            }
+
         });
 
         //send immediatly a feedback to the incoming connection
@@ -59,10 +65,9 @@ function wsStart() {
             "welcome": "SMARTHOLDEM"
         }));
 
-
         if (!eventsInit) {
 
-            emitter.eventBus.on('block:new', function (data) {
+            emitter.eventBus.on('block:new:generate', function (data) {
                 wss.clients.forEach(function each(client) {
                     if (client.readyState === WebSocket.OPEN) {
                         client.send(JSON.stringify(data))
